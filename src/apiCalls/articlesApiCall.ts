@@ -1,3 +1,5 @@
+import { DOMAIN } from "@/utils/constants";
+import { SingleArticle } from "@/utils/types";
 import { Article } from "@prisma/client";
 
 // Get Articles Based On PageNumber
@@ -43,4 +45,18 @@ export async function getArticlesBasedOnSearch(
     throw new Error("failed1");
   }
   return data;
+}
+
+// Get Single Articles By Id
+export async function getSingleArticle(
+  articleId: string,
+): Promise<SingleArticle> {
+  // const { id } = await params; // هنا بنفك الـ Promise
+  const response = await fetch(`${DOMAIN}/api/articles/${articleId}`, {
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to fetch article");
+  }
+  return response.json();
 }

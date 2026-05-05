@@ -13,7 +13,6 @@ const Header = async () => {
   // if (token) {
   //   verifyTokenForPage(token);
   // }
-
   const payload = verifyTokenForPage(token);
 
   return (
@@ -25,7 +24,7 @@ const Header = async () => {
             <strong className="text-blue-800 md:text-2xl capitalize">
               {payload?.username}
             </strong>
-            <LogoutButton/>
+            <LogoutButton />
           </>
         ) : (
           <>

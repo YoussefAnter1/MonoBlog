@@ -1,21 +1,26 @@
 // import { FadEdit, FadTrash } from "react-icons/fa";
+import { CommentWithUser } from "@/utils/types";
 import { FaTrash } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
-
-const CommentItem = () => {
+interface CommentItemProps {
+  comment: CommentWithUser;
+}
+const CommentItem = ({ comment }: CommentItemProps) => {
   return (
     <div className="mb-5 rounded-lg p-3 bg-gray-200 border-2 border-gray-300">
-        <div className="flex items-center justify-between mb-2">
-            <strong className="text-gray-800 uppercase">Youssef</strong>
-            <span className="bg-yellow-700 px-1 rounded-lg text-white">1/1/2026</span>
-        </div>
-        <p className="flex justify-end items-center">Thanks for this article</p>
-        <div className="flex justify-end items-center">
-            <FaRegEdit className="text-green-600 text-xl cursor-pointer me-3" />
-            <FaTrash className="text-red-600 text-xl cursor-pointer " />
-       
-
-        </div>
+      <div className="flex items-center justify-between mb-2">
+        <strong className="text-gray-800 uppercase">
+          {comment.user.username}
+        </strong>
+        <span className="bg-yellow-700 px-1 rounded-lg text-white">
+          {new Date(comment.createdAt).toDateString()}
+        </span>
+      </div>
+      <p className="flex justify-start items-center">{comment.text}</p>
+      <div className="flex justify-end items-center">
+        <FaRegEdit className="text-green-600 text-xl cursor-pointer me-3" />
+        <FaTrash className="text-red-600 text-xl cursor-pointer " />
+      </div>
     </div>
   );
 };
