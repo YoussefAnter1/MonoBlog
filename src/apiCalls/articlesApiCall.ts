@@ -10,7 +10,7 @@ export async function getArticles(
   // await new Promise((resolve) => setTimeout(resolve, 3000));
   // const response = await fetch("https://dummyjson.com/posts");
   const response = await fetch(
-    `http://localhost:3000/api/articles?pageNumber=${pageNumber}`,
+    `${DOMAIN}/api/articles?pageNumber=${pageNumber}`,
   );
   const data = await response.json();
   // console.log("this is the",data);
@@ -22,7 +22,7 @@ export async function getArticles(
 
 // Get Articles Count
 export async function getArticlesCount(): Promise<number> {
-  const response = await fetch(`http://localhost:3000/api/articles/count`);
+  const response = await fetch(`${DOMAIN}/api/articles/count`);
   const data = await response.json();
   // console.log("this is the",data);
   if (!response.ok) {
@@ -37,7 +37,7 @@ export async function getArticlesBasedOnSearch(
   searchText: string,
 ): Promise<Article[]> {
   const response = await fetch(
-    `http://localhost:3000/api/articles/search?searchText=${searchText}`,
+    `${DOMAIN}/api/articles/search?searchText=${searchText}`,
   );
   const data = await response.json();
   // console.log("this is the",data);

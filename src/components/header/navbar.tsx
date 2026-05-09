@@ -4,10 +4,11 @@ import Link from "next/link";
 import styles from "./header.module.css";
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-
 import { IoMdClose } from "react-icons/io";
-
-function Navbar() {
+interface NavbarProps {
+  isAdmin: boolean;
+}
+function Navbar({ isAdmin }: NavbarProps) {
   const [toggle, setToggle] = useState(false);
   // console.log(toggle);
   return (
@@ -54,13 +55,15 @@ function Navbar() {
           >
             About
           </Link>
-          <Link
-            onClick={() => setToggle((prev) => !prev)}
-            className={styles.navLink}
-            href="/admin"
-          >
-            Admin Dashboard
-          </Link>
+          {isAdmin && (
+            <Link
+              onClick={() => setToggle((prev) => !prev)}
+              className={styles.navLink}
+              href="/admin"
+            >
+              Admin Dashboard
+            </Link>
+          )}
         </ul>
       </div>
     </nav>

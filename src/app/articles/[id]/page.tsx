@@ -15,7 +15,6 @@ const SingleArticlePage = async ({ params }: SingleArticleProps) => {
   const token = cookieStore.get("jwtToken")?.value || "";
   const payload = verifyTokenForPage(token);
   // const response = await fetch(`https://dummyjson.com/posts/${id}`);
-
   const article: SingleArticle = await getSingleArticle(id);
   // console.log("This is response", response);
   // console.log("This is article", article.title);

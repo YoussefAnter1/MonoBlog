@@ -16,12 +16,12 @@ export function verifyToken(request: NextRequest): JWTPayload | null {
   }
 }
 // Verify Toke For Page
-export function verifyTokenForPage(token :string): JWTPayload | null {
+export function verifyTokenForPage(token: string): JWTPayload | null {
   try {
-      if (!token) return null;
+    if (!token) return null;
     const privateKey = process.env.JWT_SECRET as string;
     const userPayload = jwt.verify(token, privateKey) as JWTPayload;
-    if(!userPayload) return null
+    if (!userPayload) return null;
     return userPayload;
   } catch (error) {
     console.log(error);

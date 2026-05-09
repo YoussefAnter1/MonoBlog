@@ -36,7 +36,7 @@ const UpdateCommentModal = ({
   };
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 relative">
+      <div className="w-10/12 lg:w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 relative">
         {/* Close Button */}
         <IoMdCloseCircleOutline
           onClick={() => setOpen(false)}
