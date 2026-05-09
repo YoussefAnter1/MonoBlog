@@ -11,9 +11,9 @@ interface SingleArticleProps {
 }
 const SingleArticlePage = async ({ params }: SingleArticleProps) => {
   const { id } = await params; // هنا بنفك الـ Promise
- const cookieStore = await cookies();
-const token = cookieStore.get("jwtToken")?.value || "";
-const payload = verifyTokenForPage(token);
+  const cookieStore = await cookies();
+  const token = cookieStore.get("jwtToken")?.value || "";
+  const payload = verifyTokenForPage(token);
   // const response = await fetch(`https://dummyjson.com/posts/${id}`);
 
   const article: SingleArticle = await getSingleArticle(id);
@@ -42,7 +42,7 @@ const payload = verifyTokenForPage(token);
         Comments
       </h4>
       {article.comments.map((comment) => (
-        <CommentItem key={comment.id} comment={comment} />
+        <CommentItem key={comment.id} comment={comment} userId={payload?.id} />
       ))}
     </section>
   );

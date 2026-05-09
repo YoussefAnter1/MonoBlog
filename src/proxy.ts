@@ -9,11 +9,20 @@ export function proxy(request: NextRequest) {
   const authToken = request.cookies.get("jwtToken")?.value as string;
 
   if (!authToken) {
-    return NextResponse.json(
-      { message: "no token provided , access denied, message from proxy" },
-      { status: 401 },
-      // Unauthorized
-    );
+    if (request.nextUrl.pathname.startsWith("/api/users/profile")) {
+      return NextResponse.json(
+        { message: "no token provided , access denied, message from proxy" },
+        { status: 401 },
+      );
+    }
+    // Unauthorized
+  } else {
+    if (
+      request.nextUrl.pathname === "/login" ||
+      request.nextUrl.pathname === "/register"
+    ) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 }
 
@@ -21,5 +30,5 @@ export function proxy(request: NextRequest) {
 // export default function proxy(request: NextRequest) { ... }
 
 export const config = {
-  matcher: "/api/users/profile:path*",
+  matcher: ["/api/users/profile:path*", "/login", "/register"],
 };

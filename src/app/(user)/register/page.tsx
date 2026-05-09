@@ -1,11 +1,11 @@
 import RegisterForm from "./RegisterForm";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+// import { cookies } from "next/headers";
+// import { redirect } from "next/navigation";
 
 const RegisterPage = async () => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("jwtToken")?.value || "";
-  if (token) redirect("/");
+  // const cookieStore = await cookies();
+  // const token = cookieStore.get("jwtToken")?.value || "";
+  // if (token) redirect("/");
 
   return (
     <section className="fix-height container px-7 m-auto flex items-center justify-center">
