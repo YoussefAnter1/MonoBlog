@@ -11,6 +11,7 @@ export async function getArticles(
   // const response = await fetch("https://dummyjson.com/posts");
   const response = await fetch(
     `${DOMAIN}/api/articles?pageNumber=${pageNumber}`,
+    { cache: "no-store" },
   );
   const data = await response.json();
   // console.log("this is the",data);
@@ -22,7 +23,9 @@ export async function getArticles(
 
 // Get Articles Count
 export async function getArticlesCount(): Promise<number> {
-  const response = await fetch(`${DOMAIN}/api/articles/count`);
+  const response = await fetch(`${DOMAIN}/api/articles/count`, {
+    cache: "no-store",
+  });
   const data = await response.json();
   // console.log("this is the",data);
   if (!response.ok) {

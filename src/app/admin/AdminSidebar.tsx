@@ -15,14 +15,14 @@ const AdminSidebar = () => {
       </Link>
       <ul className="mt-10 flex items-center justify-center flex-col lg:items-start">
         <Link
-          href="./articles-table"
+          href="/admin/articles-table?pageNumber=1"
           className="flex items-center text-xl mb-5 lg:border-b border-gray-300 hover:text-yellow-200 transition"
         >
           <MdOutlineArticle className="text-2xl me-1" />
           <span className="hidden lg:block">Articles</span>
         </Link>
         <Link
-          href="./comments-table"
+          href="/admin/comments-table"
           className="flex items-center text-xl mb-5 lg:border-b border-gray-300 hover:text-yellow-200 transition"
         >
           <FaRegComments className="text-2xl me-1" />
