@@ -18,6 +18,7 @@ const AddCommentForm = ({ articleId }: AddCommentFormProps) => {
     try {
       await axios.post(`${DOMAIN}/api/comments`, { text, articleId });
       router.refresh();
+      toast.success("comment added");
       setText("");
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
