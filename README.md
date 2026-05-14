@@ -33,6 +33,7 @@
 <td>
 
 ### 🔐 Authentication & Authorization
+
 - User registration & login with JWT
 - Password hashing with bcrypt
 - Role-based access control (User / Admin)
@@ -42,6 +43,7 @@
 <td>
 
 ### 📝 Article Management
+
 - Create, read, update & delete articles
 - Paginated article listings
 - Full-text search functionality
@@ -53,6 +55,7 @@
 <td>
 
 ### 💬 Commenting System
+
 - Add comments on articles
 - Edit & delete own comments
 - Cascading deletes for data integrity
@@ -62,6 +65,7 @@
 <td>
 
 ### 🛡️ Admin Dashboard
+
 - Sidebar navigation (Articles / Comments)
 - Manage all articles from a central table
 - Moderate all user comments
@@ -73,6 +77,7 @@
 <td>
 
 ### 👤 User Profiles
+
 - View & update profile information
 - Change username, email, or password
 - Delete account functionality
@@ -81,6 +86,7 @@
 <td>
 
 ### 🎨 Modern UI/UX
+
 - Fully responsive design (mobile ↔ desktop)
 - CSS Modules for scoped styling
 - Tailwind CSS utility classes
@@ -94,19 +100,19 @@
 
 ## 🛠️ Tech Stack
 
-| Layer            | Technology                                                     |
-| ---------------- | -------------------------------------------------------------- |
-| **Framework**    | [Next.js 16](https://nextjs.org/) (App Router)                |
-| **Language**     | [TypeScript 5](https://www.typescriptlang.org/)                |
-| **UI Library**   | [React 19](https://reactjs.org/)                               |
-| **Styling**      | [Tailwind CSS 4](https://tailwindcss.com/) + CSS Modules       |
-| **Database**     | [PostgreSQL](https://www.postgresql.org/)                      |
-| **ORM**          | [Prisma 7](https://www.prisma.io/)                             |
-| **Auth**         | JWT ([jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)) + [bcryptjs](https://github.com/dcodeIO/bcrypt.js) |
-| **Validation**   | [Zod 4](https://zod.dev/)                                     |
-| **HTTP Client**  | [Axios](https://axios-http.com/)                               |
-| **Notifications**| [React Toastify](https://fkhadra.github.io/react-toastify/)   |
-| **Icons**        | [React Icons](https://react-icons.github.io/react-icons/)     |
+| Layer             | Technology                                                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Framework**     | [Next.js 16](https://nextjs.org/) (App Router)                                                                      |
+| **Language**      | [TypeScript 5](https://www.typescriptlang.org/)                                                                     |
+| **UI Library**    | [React 19](https://reactjs.org/)                                                                                    |
+| **Styling**       | [Tailwind CSS 4](https://tailwindcss.com/) + CSS Modules                                                            |
+| **Database**      | [PostgreSQL](https://www.postgresql.org/)                                                                           |
+| **ORM**           | [Prisma 7](https://www.prisma.io/)                                                                                  |
+| **Auth**          | JWT ([jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)) + [bcryptjs](https://github.com/dcodeIO/bcrypt.js) |
+| **Validation**    | [Zod 4](https://zod.dev/)                                                                                           |
+| **HTTP Client**   | [Axios](https://axios-http.com/)                                                                                    |
+| **Notifications** | [React Toastify](https://fkhadra.github.io/react-toastify/)                                                         |
+| **Icons**         | [React Icons](https://react-icons.github.io/react-icons/)                                                           |
 
 ---
 
@@ -209,35 +215,35 @@ erDiagram
 
 ### 📰 Articles
 
-| Method   | Endpoint                       | Description              | Auth     |
-| -------- | ------------------------------ | ------------------------ | -------- |
-| `GET`    | `/api/articles`                | Get all articles (paginated) | Public   |
-| `POST`   | `/api/articles`                | Create a new article     | Admin    |
-| `GET`    | `/api/articles/count`          | Get total article count  | Public   |
-| `GET`    | `/api/articles/search?searchText=` | Search articles      | Public   |
-| `GET`    | `/api/articles/:id`            | Get single article       | Public   |
-| `PUT`    | `/api/articles/:id`            | Update an article        | Admin    |
-| `DELETE` | `/api/articles/:id`            | Delete an article        | Admin    |
+| Method   | Endpoint                           | Description                  | Auth   |
+| -------- | ---------------------------------- | ---------------------------- | ------ |
+| `GET`    | `/api/articles`                    | Get all articles (paginated) | Public |
+| `POST`   | `/api/articles`                    | Create a new article         | Admin  |
+| `GET`    | `/api/articles/count`              | Get total article count      | Public |
+| `GET`    | `/api/articles/search?searchText=` | Search articles              | Public |
+| `GET`    | `/api/articles/:id`                | Get single article           | Public |
+| `PUT`    | `/api/articles/:id`                | Update an article            | Admin  |
+| `DELETE` | `/api/articles/:id`                | Delete an article            | Admin  |
 
 ### 💬 Comments
 
-| Method   | Endpoint                       | Description              | Auth     |
-| -------- | ------------------------------ | ------------------------ | -------- |
-| `GET`    | `/api/comments`                | Get all comments         | Admin    |
-| `POST`   | `/api/comments`                | Create a comment         | User     |
-| `PUT`    | `/api/comments/:id`            | Update a comment         | Owner    |
-| `DELETE` | `/api/comments/:id`            | Delete a comment         | Owner/Admin |
+| Method   | Endpoint            | Description      | Auth        |
+| -------- | ------------------- | ---------------- | ----------- |
+| `GET`    | `/api/comments`     | Get all comments | Admin       |
+| `POST`   | `/api/comments`     | Create a comment | User        |
+| `PUT`    | `/api/comments/:id` | Update a comment | Owner       |
+| `DELETE` | `/api/comments/:id` | Delete a comment | Owner/Admin |
 
 ### 👤 Users
 
-| Method   | Endpoint                       | Description              | Auth     |
-| -------- | ------------------------------ | ------------------------ | -------- |
-| `POST`   | `/api/users/register`          | Register a new user      | Public   |
-| `POST`   | `/api/users/login`             | Login & get JWT token    | Public   |
-| `GET`    | `/api/users/logout`            | Logout (clear cookie)    | User     |
-| `GET`    | `/api/users/profile/:id`       | Get user profile         | User     |
-| `PUT`    | `/api/users/profile/:id`       | Update user profile      | Owner    |
-| `DELETE` | `/api/users/profile/:id`       | Delete user account      | Owner/Admin |
+| Method   | Endpoint                 | Description           | Auth        |
+| -------- | ------------------------ | --------------------- | ----------- |
+| `POST`   | `/api/users/register`    | Register a new user   | Public      |
+| `POST`   | `/api/users/login`       | Login & get JWT token | Public      |
+| `GET`    | `/api/users/logout`      | Logout (clear cookie) | User        |
+| `GET`    | `/api/users/profile/:id` | Get user profile      | User        |
+| `PUT`    | `/api/users/profile/:id` | Update user profile   | Owner       |
+| `DELETE` | `/api/users/profile/:id` | Delete user account   | Owner/Admin |
 
 ---
 
@@ -290,7 +296,7 @@ npx prisma db seed
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
+Open [https://mono-blog-ochre.vercel.app](https://mono-blog-ochre.vercel.app) to view the app in your browser.
 
 ### 6. Build for Production
 
@@ -303,29 +309,29 @@ npm start
 
 ## 📸 Pages Overview
 
-| Page               | Route                      | Description                            |
-| ------------------- | -------------------------- | -------------------------------------- |
-| 🏠 Home             | `/`                        | Hero section + platform highlights     |
-| 📰 Articles         | `/articles?pageNumber=1`   | Paginated list of all articles         |
-| 🔍 Search           | `/articles/search?searchText=` | Search results for articles        |
-| 📖 Article Detail   | `/articles/:id`            | Full article with comments section     |
-| ℹ️ About            | `/about`                   | About the platform                     |
-| 🔐 Login            | `/login`                   | User login form                        |
-| 📝 Register         | `/register`                | User registration form                 |
-| 🛡️ Admin Dashboard  | `/admin`                   | Add new articles (admin only)          |
-| 📋 Articles Table   | `/admin/articles-table`    | Manage all articles (admin only)       |
-| 💬 Comments Table   | `/admin/comments-table`    | Manage all comments (admin only)       |
+| Page               | Route                          | Description                        |
+| ------------------ | ------------------------------ | ---------------------------------- |
+| 🏠 Home            | `/`                            | Hero section + platform highlights |
+| 📰 Articles        | `/articles?pageNumber=1`       | Paginated list of all articles     |
+| 🔍 Search          | `/articles/search?searchText=` | Search results for articles        |
+| 📖 Article Detail  | `/articles/:id`                | Full article with comments section |
+| ℹ️ About           | `/about`                       | About the platform                 |
+| 🔐 Login           | `/login`                       | User login form                    |
+| 📝 Register        | `/register`                    | User registration form             |
+| 🛡️ Admin Dashboard | `/admin`                       | Add new articles (admin only)      |
+| 📋 Articles Table  | `/admin/articles-table`        | Manage all articles (admin only)   |
+| 💬 Comments Table  | `/admin/comments-table`        | Manage all comments (admin only)   |
 
 ---
 
 ## 📜 Available Scripts
 
-| Command           | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | Start development server             |
-| `npm run build`   | Build for production                 |
-| `npm start`       | Start production server              |
-| `npm run lint`    | Run ESLint                           |
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | Start development server |
+| `npm run build` | Build for production     |
+| `npm start`     | Start production server  |
+| `npm run lint`  | Run ESLint               |
 
 ---
 
