@@ -1,8 +1,9 @@
-import { getArticles, getArticlesCount } from "@/apiCalls/articlesApiCall";
+import { getArticles } from "@/apiCalls/articlesApiCall";
 import ArticleItem from "@/components/articles/ArticleItem";
 import Pagination from "@/components/articles/Pagination";
 import SearchArticleInput from "@/components/articles/SearchArticleInput";
 import { ARTICLE_PER_PAGE } from "@/utils/constants";
+import { prisma } from "@/utils/prisma";
 // import { Article } from "@/generated/prisma/client";
 // import { Article } from "@/utils/types";
 import { Article } from "@prisma/client";
@@ -14,7 +15,7 @@ interface ArticlesPageProps {
 const ArticlesPage = async ({ searchParams }: ArticlesPageProps) => {
   const { pageNumber } = await searchParams;
   const articles: Article[] = await getArticles(pageNumber);
-  const count: number = await getArticlesCount();
+  const count: number = await prisma.article.count()
   const pages = Math.ceil(count / ARTICLE_PER_PAGE);
   return (
     <section className="fix-height container m-auto px-5">

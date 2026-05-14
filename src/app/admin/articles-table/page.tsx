@@ -4,9 +4,10 @@ import { redirect } from "next/navigation";
 import { ARTICLE_PER_PAGE } from "@/utils/constants";
 import { Article } from "@prisma/client";
 import Link from "next/link";
-import { getArticles, getArticlesCount } from "@/apiCalls/articlesApiCall";
+import { getArticles } from "@/apiCalls/articlesApiCall";
 import Pagination from "@/components/articles/Pagination";
 import DeleteArticleHandler from "./DeleteArticleButton";
+import { prisma } from "@/utils/prisma";
 interface AdminArticlesTableProps {
   searchParams: Promise<{ pageNumber: string }>;
 }
@@ -22,7 +23,7 @@ const AdminArticlesTable = async ({
   if (payload?.isAdmin === false) redirect("/");
 
   const articles: Article[] = await getArticles(pageNumber);
-  const count: number = await getArticlesCount();
+  const count: number = await prisma.article.count();
   const pages = Math.ceil(count / ARTICLE_PER_PAGE);
 
   return (
@@ -51,7 +52,7 @@ const AdminArticlesTable = async ({
                 >
                   Edit
                 </Link>
-               <DeleteArticleHandler articleId={article.id} />
+                <DeleteArticleHandler articleId={article.id} />
               </td>
               <td className="hidden lg:inline-block p-3">
                 <Link
