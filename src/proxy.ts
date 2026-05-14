@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { verifyTokenForPage } from "./utils/verifyToken";
 
 // This function can be marked `async` if using `await` inside
 export function proxy(request: NextRequest) {
@@ -7,6 +8,22 @@ export function proxy(request: NextRequest) {
   console.log("proxy called");
   // const authToken = request.headers.get("authToken") as string;
   const authToken = request.cookies.get("jwtToken")?.value as string;
+  const pathname = request.nextUrl.pathname;
+
+  // =========================
+  // حماية الأدمن (إضافة جديدة)
+  // =========================
+  if (pathname.startsWith("/admin")) {
+    if (!authToken) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
+    const payload = verifyTokenForPage(authToken);
+
+    if (!payload || !payload.isAdmin) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
 
   if (!authToken) {
     if (request.nextUrl.pathname.startsWith("/api/users/profile")) {
@@ -30,5 +47,5 @@ export function proxy(request: NextRequest) {
 // export default function proxy(request: NextRequest) { ... }
 
 export const config = {
-  matcher: ["/api/users/profile:path*", "/login", "/register"],
+  matcher: ["/api/users/profile:path*", "/admin/:path*", "/login", "/register"],
 };
