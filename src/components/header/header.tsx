@@ -21,9 +21,9 @@ const Header = async () => {
       <div className={styles.right}>
         {payload ? (
           <>
-            <strong className="text-blue-800 md:text-2xl capitalize">
+            <Link href="/profile" className="text-blue-800 md:text-2xl capitalize">
               {payload?.username}
-            </strong>
+            </Link>
             <LogoutButton />
           </>
         ) : (

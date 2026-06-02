@@ -12,7 +12,7 @@ const LogoutButton = () => {
       await axios.get(`${DOMAIN}/api/users/logout`);
       router.push("/");
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.warning("Something went wrong");
     }
   };

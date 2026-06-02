@@ -1,8 +1,5 @@
 import { getSingleArticle } from "@/apiCalls/articlesApiCall";
-import { verifyTokenForPage } from "@/utils/verifyToken";
 import { Article } from "@prisma/client";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import EditArticlesForm from "./EditArticleForm";
 
 interface EditArticlePageProps {
@@ -11,10 +8,6 @@ interface EditArticlePageProps {
 
 const EditArticlePage = async ({ params }: EditArticlePageProps) => {
   const { id } = await params;
-  const cookieStore = await cookies();
-  const token = cookieStore.get("jwtToken")?.value || "";
-  const payload = verifyTokenForPage(token);
-  if (payload?.isAdmin === false) redirect("/");
   const article: Article = await getSingleArticle(id);
   return (
     <section className="fix-height flex items-center justify-center px-5 lg:px-20">

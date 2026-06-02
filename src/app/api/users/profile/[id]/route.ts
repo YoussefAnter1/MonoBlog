@@ -32,13 +32,6 @@ export async function DELETE(request: NextRequest, { params }: Props) {
     if (userFromToken !== null && userFromToken.id === user.id) {
       // deleting the user
       await prisma.user.delete({ where: { id: parseInt(id) } });
-      // deleting the comments that belong to this user
-      const commentIds = user?.comments.map((comment) => comment.id);
-      await prisma.comment.deleteMany({
-        where: {
-          id: { in: commentIds },
-        },
-      });
       return NextResponse.json(
         {
           message: "your profile (account) has been deleted",
@@ -152,7 +145,7 @@ export async function PUT(request: NextRequest, { params }: Props) {
         password: body.password,
       },
     });
-    const { password, ...other } = updatedUser;
+    const { password: _, ...other } = updatedUser;
     return NextResponse.json({ ...other }, { status: 200 });
   } catch (error) {
     console.log(error);

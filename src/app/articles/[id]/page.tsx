@@ -1,10 +1,11 @@
-import { getSingleArticle } from "@/apiCalls/articlesApiCall";
+// import { getSingleArticle } from "@/apiCalls/articlesApiCall";
 import AddCommentForm from "@/components/Comments/AddCommentForm";
 import CommentItem from "@/components/Comments/CommentItem";
 import { SingleArticle } from "@/utils/types";
 import { cookies } from "next/headers";
 import { verifyTokenForPage } from "@/utils/verifyToken";
-
+import { prisma } from "@/utils/prisma";
+import { notFound } from "next/navigation";
 interface SingleArticleProps {
   //   params: { id: string };
   params: Promise<{ id: string }>;
@@ -15,10 +16,34 @@ const SingleArticlePage = async ({ params }: SingleArticleProps) => {
   const token = cookieStore.get("jwtToken")?.value || "";
   const payload = verifyTokenForPage(token);
   // const response = await fetch(`https://dummyjson.com/posts/${id}`);
-  const article: SingleArticle = await getSingleArticle(id);
   // console.log("This is response", response);
   // console.log("This is article", article.title);
+  // const article: SingleArticle = await getSingleArticle(id);
 
+  // const article = articles.find((a) => a.id === parseInt(id));
+  const article = (await prisma.article.findUnique({
+    where: { id: parseInt(id) },
+    include: {
+      comments: {
+        include: {
+          user: {
+            select: {
+              username: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+    },
+  })) as SingleArticle;
+
+  if (!article) {
+    // throw new Error("Articles Not Found");
+    notFound(); 
+    // redirect('/not-found')
+  }
   return (
     <section className="fix-height container m-auto w-full px-5 pt-8 md:w-3/4">
       <div className="bg-white p-7 rounded-lg">

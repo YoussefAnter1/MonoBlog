@@ -1,5 +1,4 @@
-
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 /**
@@ -9,7 +8,7 @@ import { cookies } from "next/headers";
  * @access Public
  */
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     (await cookies()).delete("jwtToken");
     return NextResponse.json({ message: "logout" }, { status: 200 });
