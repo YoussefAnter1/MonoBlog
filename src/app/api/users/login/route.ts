@@ -14,7 +14,7 @@ import { JWTPayload } from "@/utils/types";
  */
 export async function POST(request: NextRequest) {
   try {
-    const body = (await await request.json()) as LoginUserDto;
+    const body = (await request.json()) as LoginUserDto;
     const validation = loginSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json(

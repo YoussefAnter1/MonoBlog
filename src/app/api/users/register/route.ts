@@ -16,7 +16,7 @@ import { setCookie } from "@/utils/generateToken";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await await request.json()) as RegisterUserDto;
+    const body = (await request.json()) as RegisterUserDto;
     const validation = registerSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json(
