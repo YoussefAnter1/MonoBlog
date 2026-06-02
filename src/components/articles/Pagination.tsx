@@ -44,7 +44,7 @@ const Pagination = ({ pages, pageNumber, route }: PaginationProps) => {
           // href={`${route}?pageNumber=${nextPage}`}
           href={{
             pathname: route,
-            query: { pageNumber: prevPage },
+            query: { pageNumber: nextPage },
           }}
           className="py-1 px-3 border border-gray-700 font-bold text-xl cursor-pointer hover:bg-gray-200 transition"
         >
